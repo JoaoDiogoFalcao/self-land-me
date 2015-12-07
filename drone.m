@@ -2,7 +2,7 @@ function drone(mission, Edge_low, Edge_high)
     close all;
     figure;
     h1 = 1;
-    ls = surf([0 0;0 0]);
+    ls = mesh([0 0;0 0]);
     pause(0.1);
     hold on;
     %% Meta Data
