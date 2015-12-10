@@ -1,4 +1,4 @@
-function [Lat, Lng, Altitude, LR_Altitude, Timestamp] = importLog(fileToRead1)
+function [Lat, Lng, Altitude, LR_Altitude, Heading, Timestamp] = importLog(fileToRead1)
 %IMPORTFILE(FILETOREAD1)
 %  Imports data from the specified file
 %  FILETOREAD1:  file to read
@@ -11,10 +11,12 @@ newData1 = load(fileToRead1,'-mat');
 % Create new variables in the base workspace from those fields.
 % CTUN(:,7)=Alt, CTUN(:,10)=SAlt, CTUN_label, GPS(:,8)=Lat, GPS(:,9)=Lng, GPS(:,4)=GMS, GPS(:,5)=GWk, GPS_label
 
-vars = {'CTUN', 'CTUN_label', 'GPS', 'GPS_label'}';
+vars = {'CTUN', 'CTUN_label', 'GPS', 'GPS_label', 'ATT', 'ATT_label'}';
 for i = 1:length(vars)
     assignin('base', vars{i}, newData1.(vars{i}));
 end
+
+Heading = newData1.ATT(:,8);
 
 timezone = -8*3600000;
 
@@ -41,4 +43,6 @@ Lat = yi_2;
 Timestamp = yi_1;
 
 datestr(Timestamp(1))
+dlmwrite('meta_mission.csv',[Altitude Heading(1:end-1) Lat Lng],'delimiter',',','precision',15);
+
 end

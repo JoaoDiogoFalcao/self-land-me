@@ -13,7 +13,7 @@ function drone(mission, Edge_low, Edge_high)
     FOV_V = 94.4; %degrees 4x3W Vertical
     FOV_H = 122.6; %degrees 4x3W Horizontal
 
-    for time_frame=1:size(Lat)
+    for time_frame=747:747%size(Lat)
         %% Image input
         if ( exist(fullfile(cd, sprintf('Drone1/Corrected/%i-%i%s', mission, time_frame, '.JPG')), 'file') == 2)
             RGB = imread(sprintf('Drone1/Corrected/%i-%i%s', mission, time_frame, '.JPG')); % Elapsed time is 0.328312 seconds.
